@@ -1,6 +1,3 @@
-sudo yum install -y yum-utils device-mapper-persistent-data lvm2
-sudo yum-config-manager --add-repo http://mirrors.aliyun.com/docker-ce/linux/centos/docker-ce.repo
-
 cat <<EOF > /etc/yum.repos.d/kubernetes.repo
 [kubernetes]
 name=Kubernetes
@@ -11,11 +8,21 @@ repo_gpgcheck=1
 gpgkey=https://mirrors.aliyun.com/kubernetes/yum/doc/yum-key.gpg https://mirrors.aliyun.com/kubernetes/yum/doc/rpm-package-key.gpg
 EOF
 
+sudo swapoff -a
+
 setenforce 0
 
 sudo yum makecache fast
 
-sudo yum install -y kubelet-1.13.1-0 kubeadm-1.13.1-0 kubectl-1.13.1-0 docker-ce-18.06.1.ce-3.el7
+sudo yum install -y yum-utils device-mapper-persistent-data lvm2
+sudo yum-config-manager --add-repo http://mirrors.aliyun.com/docker-ce/linux/centos/docker-ce.repo
+
+
+sudo yum install -y kubelet-1.13.1-0 
+sudo yum install -y kubectl-1.13.1-0 
+sudo yum install -y kubeadm-1.13.1-0 
+sudo yum install -y docker-ce-18.06.1.ce-3.el7
+
 sudo systemctl enable kubelet 
 sudo systemctl enable docker
 sudo systemctl start kubelet
