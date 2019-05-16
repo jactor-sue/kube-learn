@@ -1,6 +1,6 @@
 kubeadm reset -f
-kubeadm config images pull --config kubeadm-init.config
-kubeadm init --config kubeadm-init.config
+kubeadm config images pull --config kubeadm-init.yaml
+kubeadm init --config kubeadm-init.yaml
 
 rm -rf $HOME/.kube
 mkdir -p $HOME/.kube
